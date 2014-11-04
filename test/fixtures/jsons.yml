@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recipe_search: MyText
+  recipe_fetch: MyText
+
+two:
+  recipe_search: MyText
+  recipe_fetch: MyText
