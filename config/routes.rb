@@ -1,4 +1,20 @@
-Rails.application.routes.draw do
+UseItOrLoseIt::Application.routes.draw do
+  # resources :users
+  # resources :tags
+  # resources :posts
+
+  get '/'=> 'orders#index'
+  get '/orders/new'=> 'orders#new'
+  get '/orders/edit'=> 'orders#edit'
+  get '/'=> 'orders#show'
+
+  get '/'=> 'recipes#index'
+  get '/'=> 'recipes#show'
+  # get 'products/:id' => 'products#view'
+  # get 'products/:id/purchase' => 'products#purchase', as: :purchase
+
+end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +69,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

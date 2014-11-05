@@ -7,21 +7,18 @@
     :title => :val,
     :description => :val,
     :star_rating => :val,
+    :review_count => :val,
     :web_url => :val,
     :image_url => :val,
-    :review_count => :val,
     :instructions => :val,
-    :yield_number => :val,
-    :yield_unit => :val,
-    :total_minutes => :val
+    :yield_number => :val
     },
   :ingredients =>
     [
       {
-      :name => :val,
+      :name => :val,  #will be pluralized by default
       :display_quantity => :val,
-      :unit => :val,
-      :preparation_notes => :val}
+      :unit => :val
       },  *Footnote A
     ]
   }, **Footnote B
