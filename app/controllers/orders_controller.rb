@@ -5,7 +5,8 @@ class OrdersController < ApplicationController
   end
   
   def create
-    @order = Order.new(params[:leftovers)
+    @order = Order.new
+    @order.render_recipes(params[:leftovers])
     redirect "orders/#{@order.id}"
   end
 
