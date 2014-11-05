@@ -17,10 +17,9 @@ ActiveRecord::Schema.define(version: 20141103235616) do
     t.string   "name"
     t.integer  "display_quantity"
     t.string   "unit"
-    t.text     "preparation_notes"
     t.integer  "recipe_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "orders", force: true do |t|
@@ -38,8 +37,6 @@ ActiveRecord::Schema.define(version: 20141103235616) do
     t.integer  "review_count"
     t.text     "instructions"
     t.integer  "yield_number"
-    t.string   "yield_unit"
-    t.integer  "total_minutes"
     t.integer  "order_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false

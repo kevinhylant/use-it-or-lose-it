@@ -10,8 +10,6 @@ class CreateRecipes < ActiveRecord::Migration
       t.integer :review_count
       t.text :instructions
       t.integer :yield_number
-      t.string :yield_unit
-      t.integer :total_minutes
 
       t.integer :order_id
       t.timestamps null: false
