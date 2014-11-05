@@ -4,9 +4,5 @@ class Order < ActiveRecord::Base
   attr_reader :leftovers
 
   include Formattable
-
-  def leftovers=(names)
-    @leftovers = names.split(/\s*,\s*/)
-  end
  
 end

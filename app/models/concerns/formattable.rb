@@ -104,7 +104,7 @@ module Formattable
 
 	def format(food_array)
 		f = Formatter.new
-		ids_hash = f.to_ids_hash(to_search_url(food_array))
+		ids_hash = f.to_ids_hash(f.to_search_url(food_array))
 		two_similar = f.most_similar(ids_hash.values)
 		three_similar = f.most_similar_to(two_similar, ids_hash.values)
 		ids_array = f.recipe_ids(ids_hash, two_similar, three_similar)
