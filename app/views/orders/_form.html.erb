@@ -1,21 +1,7 @@
-  <h1>WHAT'S IN YOUR FRIDGE?</h1>
+<form action="/orders" method="post">
 
-  <%= form_for([@order, Ingredient.new]) do |f| %>
-    <%= f.text_field :leftovers[], :placeholder => "Write something..."%>
-  <% end %>
-
-<ul>
-  <%= render @order.ingredients %>
-</ul>
-
-<%# @list.items.each do |item| %>
-  <%#= render :partial => "items/item", :locals => {:item => item} %>
-  <%#= render "items/item", :item => item %>
-  <%#= render item %>
-<%# end %>
-
-<%#= render :collection => @list.items, :partial => "items/item", :as => :item %>
-
-<%#= render :collection => @list.items, :partial => "items/item" %>
-
-  
+<%= form_tag("/orders") do %>
+  <%= label_tag('order[leftovers]', "Leftovers:") %>
+  <%= text_field_tag('order[leftovers]') %>
+  <%= submit_tag "See My Meals!" %>
+<% end %>
