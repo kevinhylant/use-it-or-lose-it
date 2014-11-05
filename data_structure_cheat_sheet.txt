@@ -1,0 +1,31 @@
+
+[
+  {
+  :recipe => 
+    {
+    :big_oven_recipe_id => :val,
+    :title => :val,
+    :description => :val,
+    :star_rating => :val,
+    :review_count => :val,
+    :web_url => :val,
+    :image_url => :val,
+    :instructions => :val,
+    :yield_number => :val
+    },
+  :ingredients =>
+    [
+      {
+      :name => :val,  #will be pluralized by default
+      :display_quantity => :val,
+      :unit => :val
+      },  *Footnote A
+    ]
+  }, **Footnote B
+]
+
+
+*Footnote A:  repeat hash for each ingredient in the recipe
+
+**Footnote B:  the hash above will be repeated 2 more times (for the 3 recipes delivered to a user per order). The format is an array of 3 hashes. Within each hash there are two primary keys (for mass-assignment purposes while creating Recipe & Ingredient Objects. The :ingredients key is composed of an array of hashes (one hash per ingredient).
+
