@@ -4,7 +4,6 @@ class CreateIngredients < ActiveRecord::Migration
       t.string :name
       t.integer :display_quantity
       t.string :unit
-      t.text :preparation_notes
 
       t.integer :recipe_id
       t.timestamps null: false

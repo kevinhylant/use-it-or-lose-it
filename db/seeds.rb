@@ -12,9 +12,8 @@ recipe1 = Recipe.create(
   image_url:'http://flatironschool.com/img/fis-tumblr-logo.png',
   review_count: 42,
   instructions: 'These are the instructions. They are very looooonnnnnggggg',
-  yield_number: 2,
-  yield_unit: 'Serving',
-total_minutes: 20)
+  yield_number: 2
+  )
 
 recipe2 = Recipe.create(
   big_oven_recipe_id: 2,
@@ -25,9 +24,8 @@ recipe2 = Recipe.create(
   image_url:'http://flatironschool.com/img/fis-tumblr-logo.png',
   review_count: 84,
   instructions: 'These are the instructions for 2. They are very kinda long',
-  yield_number: 2,
-  yield_unit: 'Serving',
-total_minutes: 40)
+  yield_number: 2
+  )
 
 recipe3 = Recipe.create(
   big_oven_recipe_id: 3,
@@ -38,9 +36,8 @@ recipe3 = Recipe.create(
   image_url:'http://flatironschool.com/img/fis-tumblr-logo.png',
   review_count: 84,
   instructions: 'These are the instructions for 3. They are very kinda long',
-  yield_number: 3,
-  yield_unit: 'Serving',
-total_minutes: 60)
+  yield_number: 3
+  )
 
 recipe1.order= order1
 recipe2.order= order1
@@ -51,30 +48,25 @@ recipe2.save
 recipe3.save
 
 pasta = Ingredient.create(
-  name: "pasta",
-  display_quantity: 1,
-  unit: "box",
-preparation_notes: "prep notes")
+    name: "pasta",
+    display_quantity: 1,
+    unit: "box")
 marinara = Ingredient.create(
   name: "marinara sauce",
   display_quantity: 2,
-  unit: "can",
-preparation_notes: "prep notes")
+  unit: "can")
 tuna = Ingredient.create(
   name: "tuna",
   display_quantity: 6,
-  unit: "oz",
-preparation_notes: "prep notes")
+  unit: "oz")
 meatballs = Ingredient.create(
   name: "meatballs",
   display_quantity: 1,
-  unit: "lb",
-preparation_notes: "prep notes")
+  unit: "lb")
 beef = Ingredient.create(
   name: "ground beef",
   display_quantity: 1,
-  unit: "lb",
-preparation_notes: "prep notes")
+  unit: "lb")
 
 recipe1.ingredients << [pasta, marinara, tuna]
 recipe2.ingredients << [pasta, marinara, meatballs]

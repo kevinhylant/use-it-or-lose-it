@@ -1,17 +1,15 @@
 UseItOrLoseIt::Application.routes.draw do
-  # resources :users
-  # resources :tags
-  # resources :posts
+  # resources :orders
+  # resources :recipes
+  # resources :ingredients
 
   get '/'=> 'orders#index'
   get '/orders/new'=> 'orders#new'
-  get '/orders/edit'=> 'orders#edit'
-  get '/'=> 'orders#show'
+  get '/orders/create'=> 'orders#create'
+  get '/orders/:id'=> 'orders#show'
 
-  get '/'=> 'recipes#index'
-  get '/'=> 'recipes#show'
-  # get 'products/:id' => 'products#view'
-  # get 'products/:id/purchase' => 'products#purchase', as: :purchase
+  get '/recipes'=> 'recipes#index'
+  get '/recipes/:id'=> 'recipes#show'  #as: :something #TO NAME
 
 end
 
