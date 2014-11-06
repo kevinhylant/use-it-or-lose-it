@@ -28,7 +28,7 @@ module Formattable
 			ing_lists = {}
 			response.body["Results"].each_with_index do |recipe, index|
 				id = response.body["Results"][index]["RecipeID"]
-				ing_lists[id] = create_ingredient_list(id)
+				ing_lists[id] = create_ingredient_list(id) if create_ingredient_list(id) != []
 			end
 			return ing_lists
 		end

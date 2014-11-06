@@ -3,7 +3,7 @@ class Ingredient < ActiveRecord::Base
 
   def unit=(type)
     @type = type
-    @type = 'tablespoon' if type = 'tb'
+    @type = 'tablespoon' if type == 'tb'
   end
   
 end

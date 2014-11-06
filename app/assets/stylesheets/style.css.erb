@@ -1,0 +1,115 @@
+html, body {
+    height: 100%;
+    font-family: "Gill Sans";
+}
+
+.container-fluid {
+    height: 100%;
+    padding: 0px;
+}
+
+#home-container {
+    background-image: url(<%= asset_path '461823_45660359.jpg' %>);
+    background-size: cover;   
+}
+
+#search-container {
+    background-color: #D9D9D9;
+}
+
+#welcome-container {
+    background-color: #E1EDD7;
+}
+
+header {
+    width: 100%;
+}
+
+#home-container header {
+    height: 12%;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+#search-container header {
+    height: 16%;
+    background-color: #9FC087;
+}
+
+main {
+    text-align: center;
+}
+
+#home-container main {
+    width: 100%;
+    height: 88%;
+    background-color: rgba(0, 0, 0, .35);
+    padding-top: 22%;
+    color: #FFFFFF;
+}
+
+#search-container main {
+    width: 100%;
+    padding-top: 10%;
+    color: #494949;
+}
+
+#search-container .form-inline .form-control {
+    width: 50%;
+    height: 70px;
+    font-size: 160%;
+    text-align: center;
+}
+
+#home-text {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+h1 {
+    font-family: Canter;
+    font-size: 5em;
+    margin: 0px;
+    text-transform: uppercase;
+}
+
+#home-text h3 {
+    margin: 0px;
+    font-size: 1.3em;
+    letter-spacing: .8px;
+    position: relative;
+    top: -15px;
+}
+
+#home-text button {
+    background-color: rgba(0, 0, 0, .6);
+    text-transform: uppercase;
+    padding: 13px 30px;
+    font-size: 1.5em;
+}
+
+#home-text button:hover,
+#home-text button:focus,
+#home-text button:active {
+    color: #89A484;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%; 
+}
+
+#search-container footer {
+    height: 12%;
+    background-color: #9FC087;
+}
+
+#home-container footer {
+    height: 5%;
+    background-color: #D2EDC0;
+}
+
+@font-face {
+    font-family: Canter;
+    src: url('Canter Bold.otf');
+}
