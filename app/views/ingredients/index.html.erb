@@ -2,8 +2,8 @@
 <h2>Your Shopping List:</h2>
 <br>
 <ul>
-<%= @order.shopping_list.each do |i,q| %>
-  <li><%="#{q} units of #{i}" %></li>
+<% @order.shopping_list.each do |name,attributes| %>
+  <li><%="#{remove_if_not_plural(attributes[:quantity])} #{attributes[:measurement]} of #{name}" %></li>
 <% end %>
 </ul>
 <br>

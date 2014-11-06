@@ -80,9 +80,9 @@ meatballs = Ingredient.create(
   quantity: 1,
   measurement: "lb")
 beef = Ingredient.create(
-  name: "ground beef",
-  quantity: 1,
-  measurement: "lb")
+  name: "salt",
+  quantity: 0,
+  measurement: "pinch")
 
 recipe1.ingredients << [pasta1, marinara1, tuna]
 recipe2.ingredients << [pasta2, marinara2, meatballs]

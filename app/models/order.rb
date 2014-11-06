@@ -6,10 +6,15 @@ class Order < ActiveRecord::Base
   include Formattable
 
   def create_shopping_list
-  
-    @shopping_list = Hash.new(0)
+    
     self.ingredients.each do |i| 
-      @shopping_list[i.name] += i.quantity
+      @shopping_list ||= {}
+      shopping_list[i.name] ||= Hash.new(0)
+      shopping_list[i.name][:quantity] += i.quantity
+      shopping_list[i.name][:measurement] = i.measurement.pluralize
+      if shopping_list[i.name][:quantity] <= 1 
+        shopping_list[i.name][:measurement] = ("A "+i.measurement.singularize)  
+      end
     end
     
     self.shopping_list= @shopping_list
