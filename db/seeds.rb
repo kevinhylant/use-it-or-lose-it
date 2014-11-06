@@ -47,27 +47,44 @@ recipe1.save
 recipe2.save
 recipe3.save
 
-pasta = Ingredient.create(
+pasta1 = Ingredient.create(
   name: "pasta",
-  quantity: 1,
-  unit: "box")
-marinara = Ingredient.create(
-  name: "marinara sauce",
   quantity: 2,
-  unit: "can")
+  measurement: "box")
+  pasta2 = Ingredient.create(
+    name: "pasta",
+    quantity: 4,
+    measurement: "boxes")
+  pasta3 = Ingredient.create(
+    name: "pasta",
+    quantity: 2,
+    measurement: "box")
+marinara1 = Ingredient.create(
+  name: "marinara sauce",
+  quantity: 6,
+  measurement: "tb")
+  marinara2 = Ingredient.create(
+    name: "marinara sauce",
+    quantity: 6,
+    measurement: "tbs")
+  marinara3 = Ingredient.create(
+    name: "marinara sauce",
+    quantity: 6,
+    measurement: "tablespoons")
 tuna = Ingredient.create(
   name: "tuna",
   quantity: 6,
-  unit: "oz")
+  measurement: "oz")
 meatballs = Ingredient.create(
   name: "meatballs",
   quantity: 1,
-  unit: "lb")
+  measurement: "lb")
 beef = Ingredient.create(
   name: "ground beef",
   quantity: 1,
-  unit: "lb")
+  measurement: "lb")
 
-recipe1.ingredients << [pasta, marinara, tuna]
-recipe2.ingredients << [pasta, marinara, meatballs]
-recipe3.ingredients << [pasta, marinara, beef]
+recipe1.ingredients << [pasta1, marinara1, tuna]
+recipe2.ingredients << [pasta2, marinara2, meatballs]
+recipe3.ingredients << [pasta3, marinara3, beef]
+

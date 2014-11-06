@@ -1,14 +1,12 @@
 UseItOrLoseIt::Application.routes.draw do
-  resources :orders, :except => [:destroy,:update,:edit] do
+  resources :orders, :only => [:index, :new, :show, :create] do 
     resources :ingredients, :only => [:index]
   end
-  resources :recipes, :only => [:index]
+  resources :recipes, :only => [:index, :show]
   
   root 'orders#index'
   
   
-
-
 end
 
   # The priority is based upon order of creation: first created -> highest priority.

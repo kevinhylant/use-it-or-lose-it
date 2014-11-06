@@ -1,7 +1,14 @@
 <p>Order Id: <%= @order.id %></p>
 <h2>Your Shopping List:</h2>
+<br>
+<ul>
+<%= @order.shopping_list.each do |i,q| %>
+  <li><%="#{q} units of #{i}" %></li>
+<% end %>
+</ul>
+<br>
 <ul>
 <% @ingredients.each do |i| %>
-  <li><%= i.quantity if i.quantity != 0%> <%= i.unit %><%='s' if i.quantity > 1 %> of <%= i.name %></li>
+  <li><%= i.quantity %> <%= plural?(i) ? i.measurement.pluralize : i.measurement.singularize %> of <%= i.name %></li>
 <% end %>
 </ul>

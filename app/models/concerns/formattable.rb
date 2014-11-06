@@ -92,7 +92,7 @@ module Formattable
 				{
 					id: ingredient_hash["IngredientID"],
 					name: ingredient_hash["Name"],
-					unit: ingredient_hash["Unit"],
+					measurement: ingredient_hash["Unit"],
 					quantity: ingredient_hash["Quantity"]
 				}
 			end
@@ -107,7 +107,8 @@ module Formattable
 		two_similar = f.most_similar(ids_hash.values)
 		three_similar = f.most_similar_to(two_similar, ids_hash.values)
 		ids_array = f.recipe_ids(ids_hash, two_similar, three_similar)
-		ids_array.collect{ |id| f.format_hash(id) }
+		ids_array.collect{ |id| f.format_hash(id) } 
 	end
+
 
 end

@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20141103235616) do
   create_table "ingredients", force: true do |t|
     t.string   "name"
     t.integer  "quantity"
-    t.string   "unit"
+    t.string   "measurement"
     t.integer  "recipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "orders", force: true do |t|
