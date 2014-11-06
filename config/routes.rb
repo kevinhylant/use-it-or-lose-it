@@ -1,8 +1,8 @@
 UseItOrLoseIt::Application.routes.draw do
-  resources :orders do
+  resources :orders, :except => [:destroy,:update,:edit] do
     resources :ingredients, :only => [:index]
   end
-  resources :recipes
+  resources :recipes, :only => [:index]
   
   root 'orders#index'
   
