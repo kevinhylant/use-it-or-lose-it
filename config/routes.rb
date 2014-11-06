@@ -1,17 +1,13 @@
 UseItOrLoseIt::Application.routes.draw do
-  # resources :orders
-  # resources :recipes
-  # resources :ingredients
-
-  get '/'=> 'orders#index'
+  resources :orders do
+    resources :ingredients, :only => [:index]
+  end
+  resources :recipes
   
-  get '/orders'=> 'orders#index'
-  get  '/orders/new'=> 'orders#new'
-  post '/orders'=> 'orders#create'
-  # get  '/orders/:id'=> 'orders#show'
+  root 'orders#index'
+  
+  
 
-  # get '/recipes'=> 'recipes#index'
-  # get '/recipes/:id'=> 'recipes#show'  #as: :something #TO NAME
 
 end
 

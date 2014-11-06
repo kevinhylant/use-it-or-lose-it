@@ -1,0 +1,11 @@
+Recipe Id: <%= @recipe.id %>
+
+<% r= @recipe %>
+<ol>
+  <li>Title: <%= r.title %></li>
+  <li>Instructions: <%= r.instructions %></li>
+  <li>Serves: <%= r.yield_number %></li>
+</ol>
+
+<%= image_tag('pg4.png', width:'150px', height:'100px') %>
+<p><a href="/orders/<%= r.order.id %>">TAKE ME BACK!</a></p>

@@ -16,6 +16,7 @@ module Formattable
 		def create_ingredient_list(id)
 			recipe_response = Unirest.get("http://api.bigoven.com/recipe/#{id}?api_key=dvx1W0MNFK7NO2qLpiG0jGOdk6m9u0m3", headers:{ "Accept" => "application/json"})
 			recipe_response.body["Ingredients"].collect do |i| 
+
 				temp = i["Name"].downcase
 				temp.split.each { |w| temp.gsub!(w + " " , "") if lib.include?(w) }
 				temp.strip
@@ -78,7 +79,7 @@ module Formattable
 
 		def format_hash(id)
 			recipe_response = Unirest.get("http://api.bigoven.com/recipe/#{id}?api_key=dvx1W0MNFK7NO2qLpiG0jGOdk6m9u0m3", headers:{ "Accept" => "application/json"})
-			recipe = { big_oven_recipe_id: recipe_response.body["RecipeID"],
+			recipe = { id: recipe_response.body["RecipeID"],
 								 title: recipe_response.body["Title"],
 								 description: recipe_response.body["Description"],
 								 star_rating: recipe_response.body["StarRating"],
@@ -86,15 +87,13 @@ module Formattable
 								 image_url: recipe_response.body["ImageURL"],
 								 review_count: recipe_response.body["ReviewCount"],
 								 instructions: recipe_response.body["Instructions"],
-								 yield_number: recipe_response.body["YieldNumber"],
-								 # yield_unit: recipe_response.body["YieldUnit"],
-								 # total_minutes: recipe_response.body["TotalMinutes"] 
-							 }
+								 yield_number: recipe_response.body["YieldNumber"]}
 			ingredients = recipe_response.body["Ingredients"].map do |ingredient_hash|
 				{
+					id: ingredient_hash["IngredientID"],
 					name: ingredient_hash["Name"],
-					display_quantity: ingredient_hash["Unit"],
-					unit: ingredient_hash["Quantity"]
+					unit: ingredient_hash["Unit"],
+					quantity: ingredient_hash["Quantity"]
 				}
 			end
 			{recipe: recipe, ingredients: ingredients}

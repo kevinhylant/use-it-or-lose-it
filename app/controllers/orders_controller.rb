@@ -6,11 +6,13 @@ class OrdersController < ApplicationController
   
   def create
     @order = Order.new
-    @order.render_recipes(params[:leftovers])
-    redirect "orders/#{@order.id}"
+    leftovers_ary = (params[:order][:leftovers]).split(/\s*,\s*/)
+    @order.create_recipes_and_ingredients(leftovers_ary)
+    redirect_to order_path(@order)
   end
 
   def show
+
     @order = Order.find(params[:id])
   end
 

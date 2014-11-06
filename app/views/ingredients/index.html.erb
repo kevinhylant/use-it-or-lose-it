@@ -1,0 +1,7 @@
+<p>Order Id: <%= @order.id %></p>
+<h2>Your Shopping List:</h2>
+<ul>
+<% @ingredients.each do |i| %>
+  <li><%= i.quantity %> <%= i.unit %>: <%= i.name %></li>
+<% end %>
+</ul>

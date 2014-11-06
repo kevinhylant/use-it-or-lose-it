@@ -4,10 +4,6 @@ class Order < ActiveRecord::Base
   attr_reader :leftovers
   include Formattable
 
-  def render_recipes(leftovers)
-    array_list = leftovers.split(/\s*,\s*/)
-    self.format(array_list)  
-  end
  
   def create_recipes_and_ingredients(array_list)
   	info = format(array_list)

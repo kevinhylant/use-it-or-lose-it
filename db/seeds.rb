@@ -48,24 +48,24 @@ recipe2.save
 recipe3.save
 
 pasta = Ingredient.create(
-    name: "pasta",
-    display_quantity: 1,
-    unit: "box")
+  name: "pasta",
+  quantity: 1,
+  unit: "box")
 marinara = Ingredient.create(
   name: "marinara sauce",
-  display_quantity: 2,
+  quantity: 2,
   unit: "can")
 tuna = Ingredient.create(
   name: "tuna",
-  display_quantity: 6,
+  quantity: 6,
   unit: "oz")
 meatballs = Ingredient.create(
   name: "meatballs",
-  display_quantity: 1,
+  quantity: 1,
   unit: "lb")
 beef = Ingredient.create(
   name: "ground beef",
-  display_quantity: 1,
+  quantity: 1,
   unit: "lb")
 
 recipe1.ingredients << [pasta, marinara, tuna]

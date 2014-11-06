@@ -1,0 +1,20 @@
+<p>Order Id: <%= @order.id %></p>
+<h2>Ingredients:</h2>
+  <% @order.recipes.each do |r| %>
+    <body><h3><%= r.title %></h3>
+    <ol>
+      <li>Img Url: <%= r.image_url %></li>
+      <li>Rating: <%= r.star_rating %></li>
+      <li>Review Count: <%= r.review_count %></li>
+      <li>Description: <%= r.description %></li>
+    </ol>
+    <a href="/recipes/<%= r.id %>}">View recipe & Ingredients</a> </body>
+  <% end %>
+
+<h2><button onClick="location.href='/orders/<%= @order.id %>/ingredients'">See Your Shopping List</button></h2>
+
+
+
+
+
+
