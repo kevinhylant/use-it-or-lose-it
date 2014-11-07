@@ -4,7 +4,8 @@ class Order < ActiveRecord::Base
   attr_accessor :shopping_list
   attr_reader :leftovers
   include Formattable
-  # before_save :normalize
+  before_save :normalize
+
 
   def create_shopping_list
     
@@ -41,12 +42,19 @@ class Order < ActiveRecord::Base
     if self.persisted?
       create_ignored_list(@@raw_ignores)
       self.shopping_list.each do |name, attrs|
-        if @@ignores.include?(attrs[:measurement]) ||  attrs[:quantity] <= 1
+        if @@ignores.include?(attrs[:measurement])
           self.shopping_list[name][:normalized] = ("#{attrs[:quantity]} #{attrs[:measurement]}") 
+        elsif attrs[:quantity] <= 1
+          shopping_list[name][:normalized] = (attrs[:measurement]) 
         else
-          self.shopping_list[name][:normalized] = Measurement.parse("#{attrs[:quantity]} #{attrs[:measurement]}") 
+          shopping_list[name][:normalized] = Measurement.parse("#{attrs[:quantity]} #{attrs[:measurement]}")
+          ing_measurement = attrs[:normalized].unit
+          if is_weight?(ing_measurement.to_s)
+            shopping_list[name][:normalized]= attrs[:normalized].convert_to(:oz)
+          elsif is_volume?(ing_measurement.to_s)
+            shopping_list[name][:normalized]= attrs[:normalized].convert_to(:'fl oz')
+          end
         end
-        binding.pry
       end
     end
   end
@@ -57,5 +65,16 @@ class Order < ActiveRecord::Base
       @@ignores << term.pluralize
     end
   end
+
+  def is_weight?(obj)
+    weight_types = ['lb','oz']
+    weight_types.include?(obj)
+  end
+
+  def is_volume?(obj)
+    vol_types = ['gal','qt','pt','c.','fl. oz.','tbsp.','tsp.']
+    vol_types.include?(obj)
+  end
+
 
 end

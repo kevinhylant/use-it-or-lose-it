@@ -1,9 +1,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or buildd alongside the db with db:setup).
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-order1 = Order.new
+order1 = Order.create
 
-recipe1 = order1.recipes.build(
+recipe1 = order1.recipes.create(
   big_oven_recipe_id: 1,
   title: 'Title',
   description: 'This is the description.',
@@ -15,7 +15,7 @@ recipe1 = order1.recipes.build(
   yield_number: 2
   )
 
-recipe2 = order1.recipes.build(
+recipe2 = order1.recipes.create(
   big_oven_recipe_id: 2,
   title: 'Title2',
   description: 'This is the description for 2.',
@@ -27,7 +27,7 @@ recipe2 = order1.recipes.build(
   yield_number: 2
   )
 
-recipe3 = order1.recipes.build(
+recipe3 = order1.recipes.create(
   big_oven_recipe_id: 3,
   title: 'Title3',
   description: 'This is the description for 3.',
@@ -39,44 +39,41 @@ recipe3 = order1.recipes.build(
   yield_number: 3
   )
 
-pasta1 = recipe1.ingredients.build(
+pasta1 = recipe1.ingredients.create(
   name: "pasta",
   quantity: 2,
   measurement: "box")
-marinara1 = recipe1.ingredients.build(
+marinara1 = recipe1.ingredients.create(
   name: "marinara sauce",
   quantity: 6,
   measurement: "tablespoon")
-tuna = recipe1.ingredients.build(
+tuna = recipe1.ingredients.create(
   name: "tuna",
   quantity: 6,
   measurement: "ounce")
 
-pasta2 = recipe2.ingredients.build(
+pasta2 = recipe2.ingredients.create(
     name: "pasta",
     quantity: 4,
     measurement: "boxes")
-marinara2 = recipe2.ingredients.build(
+marinara2 = recipe2.ingredients.create(
     name: "marinara sauce",
     quantity: 6,
     measurement: "tablespoons")
-meatballs = recipe2.ingredients.build(
+meatballs = recipe2.ingredients.create(
   name: "meatballs",
   quantity: 1,
   measurement: "lb")
 
-pasta3 = recipe3.ingredients.build(
+pasta3 = recipe3.ingredients.create(
   name: "pasta",
   quantity: 2,
   measurement: "box")  
-marinara3 = recipe3.ingredients.build(
+marinara3 = recipe3.ingredients.create(
   name: "marinara sauce",
   quantity: 6,
   measurement: "tablespoons")
-beef = recipe3.ingredients.build(
+beef = recipe3.ingredients.create(
   name: "salt",
   quantity: 0,
   measurement: "pinch")
-
-order1.save
-
