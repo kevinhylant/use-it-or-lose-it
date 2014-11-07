@@ -32,6 +32,9 @@ gem 'rails-html-sanitizer', '~> 1.0'
 gem 'unirest'
 gem 'pry'
 
+# Kevin's additions
+gem 'ruby-measurement'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

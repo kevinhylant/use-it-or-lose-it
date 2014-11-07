@@ -6,9 +6,6 @@
   <li><%="#{remove_if_not_plural(attributes[:quantity])} #{attributes[:measurement]} of #{name}" %></li>
 <% end %>
 </ul>
-<br>
-<ul>
-<% @ingredients.each do |i| %>
-  <li><%= i.quantity %> <%= plural?(i) ? i.measurement.pluralize : i.measurement.singularize %> of <%= i.name %></li>
-<% end %>
-</ul>
+
+
+ 
