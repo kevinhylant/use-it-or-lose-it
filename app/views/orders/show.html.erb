@@ -1,19 +1,27 @@
-<p>Order Id: <%= @order.id %></p>
-<h2>Ingredients:</h2>
-  <% @order.recipes.each do |r| %>
-    <body><h3><%= r.title %></h3>
-    <ol>
-      <li>Img Url: <%= r.image_url %></li>
-      <li>Rating: <%= r.star_rating %></li>
-      <li>Review Count: <%= r.review_count %></li>
-      <li>Description: <%= r.description %></li>
-    </ol>
-    <a href="/recipes/<%= r.id %>}">View recipe & Ingredients</a> </body>
-  <% end %>
+<div class="container-fluid" id="welcome-container">
+    <header></header>
+    <main>
+        <h1>Welcome!</h1>
+        <div class="row">
 
-<h2><button onClick="location.href='/orders/<%= @order.id %>/ingredients'">See Your Shopping List</button></h2>
+          <% @order.recipes.each do |r| %>
+            <div class="col-md-4">
+                <div class="recipe-box" style="background-image: url(<%= r.image_url %>);"><a href = "/recipes/<%= r.id %>" id="transparency">
+                  <h2><%= r.title %></h2>
+                </a></div>
+            </div>
+          <% end %>
 
+        </div>
+        <button onClick="location.href='/orders/<%= @order.id %>/ingredients'" id="finalize-button" type="button" class="btn btn-lg">Click to Finalize Your Shopping List</button>
+    </main>
+    <footer></footer>
+</div>
 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
 
 
 
