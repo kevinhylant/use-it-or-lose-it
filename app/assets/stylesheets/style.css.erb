@@ -8,6 +8,11 @@ html, body {
     padding: 0px;
 }
 
+#show {
+    background-color: #E1EDD7;
+    height: 100%;
+}
+
 #home-container {
     background-image: url(<%= asset_path '461823_45660359.jpg' %>);
     background-size: cover;   
@@ -20,6 +25,13 @@ html, body {
 #welcome-container {
     background-color: #E1EDD7;
     clear: both;
+}
+
+#show-container {
+    background-image: url(<%= asset_path 'cuttingboard.png' %>);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 header {
@@ -38,6 +50,10 @@ header {
 
 main {
     text-align: center;
+    width: 40%;
+    height: 70%;
+    overflow: auto;
+    margin: 0 auto;
 }
 
 #home-container main {
@@ -59,6 +75,10 @@ main {
     height: 100%;
     padding-top: 5%;
     color: #494949;
+}
+
+#show-container main {
+    margin-top: 5%;
 }
 
 #search-container .form-inline .form-control {
