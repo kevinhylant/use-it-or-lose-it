@@ -32,27 +32,30 @@ class Order < ActiveRecord::Base
   	end
   end
 
-  # @@raw_ignores = ['box','pinch']
-  # @@ignores = []
+  @@raw_ignores = ['box','pinch']
+  @@ignores = []
 
-# ONLY GOING TO NORMALIZE IF > 1 , fixes problem with A
-  # private
-  # def normalize
-  #   if self.persisted?
-  #     create_ignored_list(@@raw_ignores)
-  #     self.shopping_list.each do |name, attrs|
-  #       unless @@ignores.include?(attrs[:measurement])
-  #         self.shopping_list[name][:normalized] = Measurement.parse("#{attrs[:quantity]} #{attrs[:measurement]}")
-  #       end
-  #     end
-  #   end
-  # end
 
-  # def create_ignored_list(ary)
-  #   ary.each do |term|
-  #     @@ignores << term
-  #     @@ignores << term.pluralize
-  #   end
-  # end
+  private
+  def normalize
+    if self.persisted?
+      create_ignored_list(@@raw_ignores)
+      self.shopping_list.each do |name, attrs|
+        if @@ignores.include?(attrs[:measurement]) ||  attrs[:quantity] <= 1
+          self.shopping_list[name][:normalized] = ("#{attrs[:quantity]} #{attrs[:measurement]}") 
+        else
+          self.shopping_list[name][:normalized] = Measurement.parse("#{attrs[:quantity]} #{attrs[:measurement]}") 
+        end
+        binding.pry
+      end
+    end
+  end
+
+  def create_ignored_list(ary)
+    ary.each do |term|
+      @@ignores << term
+      @@ignores << term.pluralize
+    end
+  end
 
 end

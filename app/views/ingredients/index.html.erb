@@ -3,9 +3,10 @@
 <br>
 <ul>
 <% @order.shopping_list.each do |name,attributes| %>
-  <li><%="#{remove_if_not_plural(attributes[:quantity])} #{attributes[:measurement]} of #{name}" %></li>
+  <li><%= attributes[:normalized] %> of <%= name %></li>
 <% end %>
 </ul>
 
 
  
+<!-- <li><%#="#{remove_if_not_plural(attributes[:quantity])} #{attributes[:measurement]} of #{name}" %></li> -->
