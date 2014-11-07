@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   attr_reader :leftovers
   include Formattable
   before_save :normalize
+  @@raw_ignores = ['box','pinch','tsps','jar']
+  @@ignores = []
 
 
   def create_shopping_list
@@ -13,9 +15,9 @@ class Order < ActiveRecord::Base
       @shopping_list ||= {}
       shopping_list[i.name] ||= Hash.new(0)
       shopping_list[i.name][:quantity] += i.quantity
-      shopping_list[i.name][:measurement] = i.measurement.pluralize
+      shopping_list[i.name][:measurement] = i.measurement.pluralize if i.measurement != nil
       if shopping_list[i.name][:quantity] <= 1
-        shopping_list[i.name][:measurement] = ("A "+i.measurement.singularize)  
+        shopping_list[i.name][:measurement] = ("A "+i.measurement.singularize if i.measurement != nil && i.quantity != 0) 
       end
     end
     self.shopping_list= @shopping_list
@@ -33,10 +35,6 @@ class Order < ActiveRecord::Base
   	end
   end
 
-  @@raw_ignores = ['box','pinch']
-  @@ignores = []
-
-
   private
   def normalize
     if self.persisted?
@@ -46,7 +44,10 @@ class Order < ActiveRecord::Base
           self.shopping_list[name][:normalized] = ("#{attrs[:quantity]} #{attrs[:measurement]}") 
         elsif attrs[:quantity] <= 1
           shopping_list[name][:normalized] = (attrs[:measurement]) 
-        else
+        elsif attrs[:measurement] == 0
+          shopping_list[name][:normalized] = (attrs[:quantity]) 
+        elsif attrs[:quantity] >= 1
+          
           shopping_list[name][:normalized] = Measurement.parse("#{attrs[:quantity]} #{attrs[:measurement]}")
           ing_measurement = attrs[:normalized].unit
           if is_weight?(ing_measurement.to_s)

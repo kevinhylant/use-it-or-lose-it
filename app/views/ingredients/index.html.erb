@@ -1,9 +1,13 @@
 <p>Order Id: <%= @order.id %></p>
 <h2>Your Shopping List:</h2>
-<br>
 <ul>
 <% @order.shopping_list.each do |name,attributes| %>
-  <li><%= attributes[:normalized] %> of <%= name %></li>
+  <!-- Handles edge cases -->
+  <% of = 'of' if attributes[:measurement] != nil %>
+  <% of = '' if attributes[:measurement] == 0 && attributes[:quantity] > 1 %>
+  <!-- Handles edge cases -->
+
+  <li><%="#{attributes[:normalized]} #{of} #{name.capitalize}"%></li>
 <% end %>
 </ul>
 
