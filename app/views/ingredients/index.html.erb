@@ -1,12 +1,17 @@
-<p>Order Id: <%= @order.id %></p>
-<h2>Your Shopping List:</h2>
-<ul>
-<% @order.shopping_list.each do |name,attributes| %>
-  <% of = 'of' if (attributes[:measurement] != '') %>
-  <% if attributes[:normalized].class == Measurement %>
-    <% temp_ary = attributes[:normalized].to_s.split  %>
-    <% attributes[:normalized] = "#{temp_ary[0].to_f.round(1)} #{temp_ary[1..-1].join(' ').pluralize}" %> <!-- rounds result of combined ingredients and pluralizes the measurement -->
-  <% end %>
-  <li><%="#{attributes[:normalized]} #{of} #{name}"%></li>
-<% end %>
-</ul>
+<div class="container-fluid" id="list-container">
+    <header></header>
+    <main>
+        <h1>Shopping List #<%= @order.id %></h1>
+					<ul>
+					<% @order.shopping_list.each do |name,attributes| %>
+					  <% of = 'of' if (attributes[:measurement] != '') %>
+					  <% if attributes[:normalized].class == Measurement %>
+					    <% temp_ary = attributes[:normalized].to_s.split  %>
+					    <% attributes[:normalized] = "#{temp_ary[0].to_f.round(1)} #{temp_ary[1..-1].join(' ').pluralize}" %> <!-- rounds result of combined ingredients and pluralizes the measurement -->
+					  <% end %>
+					  <li><input type = "checkbox" class = "css-checkbox" id="<%= name %>"><label for="<%= name %>" class="css-label"><%="#{attributes[:normalized]} #{of} #{name}"%></label></li>
+					<% end %>
+					</ul>
+    </main>
+    <footer></footer>
+</div>
