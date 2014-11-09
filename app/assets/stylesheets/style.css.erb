@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     font-family: "Gill Sans";
+    background-color: #9FC087;
 }
 
 .container-fluid {
@@ -20,6 +21,12 @@ html, body {
 
 #search-container {
     background-color: #D9D9D9;
+}
+
+#list-container {
+    background-color: #D9D9D9;
+    width: 70%;
+    padding: 5%;
 }
 
 #welcome-container {
@@ -48,12 +55,37 @@ header {
     background-color: #9FC087;
 }
 
+#list-container li {
+    list-style: none;
+    text-transform: uppercase;
+    line-height: 300%;
+    font-weight: bold;
+    position: relative;
+    left: -20px;
+}
+
+#list-container input {
+    position: relative;
+    left: -20px;
+}
+
+#list-container ul{
+    height: 500px;
+    overflow: auto;
+    width: 100%;
+}
+
 main {
     text-align: center;
     width: 40%;
     height: 70%;
     overflow: auto;
     margin: 0 auto;
+}
+
+#list-container main {
+    width: 80%; 
+    height: 100%;
 }
 
 #home-container main {

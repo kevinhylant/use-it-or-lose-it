@@ -1,6 +1,6 @@
 class Ingredient < ActiveRecord::Base
   belongs_to :recipe
-  @@raw_abnormals = ['box','pinch','tsps','jar','large','container','package']
+  @@raw_abnormals = ['box','pinch','tsps','jar','large','container','package', 'ea', 'sm', 'medium', 'can', 'bag', 'Tbs', '-inch', 'envelope', 'stalks']
   @@abnormals = []
 
   def to_ounces  
