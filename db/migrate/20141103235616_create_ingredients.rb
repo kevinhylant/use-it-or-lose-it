@@ -4,7 +4,6 @@ class CreateIngredients < ActiveRecord::Migration
       t.string :name
       t.integer :quantity
       t.string :measurement
-
       t.integer :recipe_id
       t.timestamps null: false
     end

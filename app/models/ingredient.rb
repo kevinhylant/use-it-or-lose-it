@@ -16,7 +16,6 @@ class Ingredient < ActiveRecord::Base
     else 
       ''
     end
-
   end
 
   def has_nil_or_zero_measurement?
@@ -36,7 +35,6 @@ class Ingredient < ActiveRecord::Base
     weight_types.include?(obj)
   end
 
-
   def is_volume?(obj)
     vol_types = ['gal','qt','pt','c.','fl. oz.','tbsp.','tsp.']
     vol_types.include?(obj)
@@ -48,7 +46,6 @@ class Ingredient < ActiveRecord::Base
       @@abnormals << term.pluralize
     end
   end
-
 end
 
 
