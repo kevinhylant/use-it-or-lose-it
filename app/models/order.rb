@@ -1,81 +1,55 @@
-class Order < ActiveRecord::Base 
+class Order < ActiveRecord::Base
   has_many :recipes
   has_many :ingredients, :through => :recipes
   attr_accessor :shopping_list
   attr_reader :leftovers
   include Formattable
-  before_save :normalize
-  @@raw_ignores = ['box','pinch','tsps','jar']
-  @@ignores = []
-
 
   def create_shopping_list
-    
-    self.ingredients.each do |i| 
+    self.ingredients.each do |i|
       @shopping_list ||= {}
-      shopping_list[i.name] ||= Hash.new(0)
-      shopping_list[i.name][:quantity] += i.quantity
-      shopping_list[i.name][:measurement] = i.measurement.pluralize if i.measurement != nil
-      if shopping_list[i.name][:quantity] <= 1
-        shopping_list[i.name][:measurement] = ("A "+i.measurement.singularize if i.measurement != nil && i.quantity != 0) 
-      end
+      shopping_list[i.name] ||= Hash.new
+      @normalized = i.to_ounces
+      add_like_ingredients_together_and_pre_format_for_erb(i)
     end
-    self.shopping_list= @shopping_list
-    self.save
   end
 
   def create_recipes_and_ingredients(array_list)
-  	info = format(array_list)
-  	info.each do |recipe_hash|
-  		new_recipe = self.recipes.build(recipe_hash[:recipe])
-  		recipe_hash[:ingredients].each do |ingredient_hash|
-  			new_recipe.ingredients.build(ingredient_hash)
-  		end
-  		new_recipe.save
-  	end
-  end
-
-  private
-  def normalize
-    if self.persisted?
-      create_ignored_list(@@raw_ignores)
-      self.shopping_list.each do |name, attrs|
-        if @@ignores.include?(attrs[:measurement])
-          self.shopping_list[name][:normalized] = ("#{attrs[:quantity]} #{attrs[:measurement]}") 
-        elsif attrs[:quantity] <= 1
-          shopping_list[name][:normalized] = (attrs[:measurement]) 
-        elsif attrs[:measurement] == 0
-          shopping_list[name][:normalized] = (attrs[:quantity]) 
-        elsif attrs[:quantity] >= 1
-          
-          shopping_list[name][:normalized] = Measurement.parse("#{attrs[:quantity]} #{attrs[:measurement]}")
-          ing_measurement = attrs[:normalized].unit
-          if is_weight?(ing_measurement.to_s)
-            shopping_list[name][:normalized]= attrs[:normalized].convert_to(:oz)
-          elsif is_volume?(ing_measurement.to_s)
-            shopping_list[name][:normalized]= attrs[:normalized].convert_to(:'fl oz')
-          end
-        end
+    info = format(array_list)
+    info.each do |recipe_hash|
+      new_recipe = self.recipes.build(recipe_hash[:recipe])
+      recipe_hash[:ingredients].each do |ingredient_hash|
+        new_recipe.ingredients.build(ingredient_hash)
       end
+      new_recipe.save
     end
   end
 
-  def create_ignored_list(ary)
-    ary.each do |term|
-      @@ignores << term
-      @@ignores << term.pluralize
+  def add_like_ingredients_together_and_pre_format_for_erb(i)
+    if @normalized != ''
+      shopping_list[i.name][:measurement] = i.measurement
+      if shopping_list[i.name][:normalized] == nil
+        shopping_list[i.name][:normalized] = @normalized
+      else
+        shopping_list[i.name][:normalized] += @normalized
+      end
+    elsif !i.has_nil_or_zero_quantity? && !i.has_nil_or_zero_measurement? && i.has_abnormal_measurment? # has quantity & measurement but has an abnormal measurement
+      shopping_list[i.name][:measurement] = i.measurement
+      if i.quantity > 1
+        shopping_list[i.name][:normalized] = "#{i.quantity} #{i.measurement.pluralize}"
+      else
+        shopping_list[i.name][:normalized] = "#{i.quantity} #{i.measurement.singularize}"
+      end
+    elsif !i.has_nil_or_zero_quantity? && i.has_nil_or_zero_measurement?    # has quantity, but no measurement
+      shopping_list[i.name][:normalized] = i.quantity
+      shopping_list[i.name][:measurement] = ''
+    elsif !i.has_nil_or_zero_measurement? && i.has_nil_or_zero_quantity?    # has measurement, but no quantity
+      shopping_list[i.name][:normalized] = "A #{i.measurement.singularize}"
+      shopping_list[i.name][:measurement] = i.measurement
+    elsif i.has_nil_or_zero_quantity? && i.has_nil_or_zero_measurement?     # no quantity & no measurement
+      shopping_list[i.name][:normalized] = ""
+      shopping_list[i.name][:measurement] = ''
     end
   end
-
-  def is_weight?(obj)
-    weight_types = ['lb','oz']
-    weight_types.include?(obj)
-  end
-
-  def is_volume?(obj)
-    vol_types = ['gal','qt','pt','c.','fl. oz.','tbsp.','tsp.']
-    vol_types.include?(obj)
-  end
-
 
 end

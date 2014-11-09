@@ -2,11 +2,11 @@
 <h2>Your Shopping List:</h2>
 <ul>
 <% @order.shopping_list.each do |name,attributes| %>
-  <!-- Handles edge cases -->
-  <% of = 'of' if attributes[:measurement] != nil %>
-  <% of = '' if attributes[:measurement] == 0 && attributes[:quantity] > 1 %>
-  <!-- Handles edge cases -->
-
-  <li><%="#{attributes[:normalized]} #{of} #{name.capitalize}"%></li>
+  <% of = 'of' if (attributes[:measurement] != '') %>
+  <% if attributes[:normalized].class == Measurement %>
+    <% temp_ary = attributes[:normalized].to_s.split  %>
+    <% attributes[:normalized] = "#{temp_ary[0].to_f.round(1)} #{temp_ary[1..-1].join(' ').pluralize}" %> <!-- rounds result of combined ingredients and pluralizes the measurement -->
+  <% end %>
+  <li><%="#{attributes[:normalized]} #{of} #{name}"%></li>
 <% end %>
 </ul>
