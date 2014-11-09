@@ -4,14 +4,20 @@
 	    <main>
 	        <h2><%= @recipe.title %></h2>
 	        <ul style="list-style-type: none; padding:0; margin:0;">
+	        	<li><b>Ingredients:</b></li>
+	        	<% @recipe.ingredients.each do |i| %>
+	        		<li><% if i.quantity != 0 && i.measurement %><%= i.quantity %> <%= i.measurement %>: <% end %><%= i.name.capitalize %></li>
+	        	<% end %>
+	        </ul>
+	        <ul style="list-style-type: none; padding:0; margin:0;">
 	        	<li><b>Instructions:</b></li>
 	        	<% @recipe.instructions.split(".").each do |i| %>
 	          	<li><%= i %>.</li>
 	          <% end %>
 					  <li><b>Serves</b>: <%= @recipe.yield_number %></li>
 	        </ul>
-	        <p><a href="/orders/<%= @recipe.order.id %>">Take Me Back!</a></p>
 	    </main>
+	    <center><p><a href="/orders/<%= @recipe.order.id %>">Take Me Back!</a></p></center>
 	    <footer></footer>
 	</div>
 </div>
