@@ -33,7 +33,7 @@ class Order < ActiveRecord::Base
       else
         shopping_list[i.name][:normalized] += @normalized
       end
-    elsif !i.has_nil_or_zero_quantity? && !i.has_nil_or_zero_measurement? && i.has_abnormal_measurment? # has quantity & measurement but has an abnormal measurement
+    elsif !i.has_nil_or_zero_quantity? && !i.has_nil_or_zero_measurement? && !i.has_normal_measurement? # has quantity & measurement but has an abnormal measurement
       shopping_list[i.name][:measurement] = i.measurement
       if i.quantity > 1
         shopping_list[i.name][:normalized] = "#{i.quantity} #{i.measurement.pluralize}"
@@ -44,6 +44,7 @@ class Order < ActiveRecord::Base
       shopping_list[i.name][:normalized] = i.quantity
       shopping_list[i.name][:measurement] = ''
     elsif !i.has_nil_or_zero_measurement? && i.has_nil_or_zero_quantity?    # has measurement, but no quantity
+      i.convert_to_long_form_normal_measurement
       shopping_list[i.name][:normalized] = "A #{i.measurement.singularize}"
       shopping_list[i.name][:measurement] = i.measurement
     elsif i.has_nil_or_zero_quantity? && i.has_nil_or_zero_measurement?     # no quantity & no measurement
