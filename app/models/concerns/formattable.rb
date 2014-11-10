@@ -91,7 +91,7 @@ module Formattable
 			ingredients = recipe_response.body["Ingredients"].map do |ingredient_hash|
 				{
 					# big_oven_id: ingredient_hash["IngredientID"],
-					name: ingredient_hash["Name"],
+					name: ingredient_hash["Name"].gsub("of ", ""),
 					measurement: ingredient_hash["Unit"],
 					quantity: ingredient_hash["Quantity"]
 				}
