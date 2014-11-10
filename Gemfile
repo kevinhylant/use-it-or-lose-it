@@ -31,6 +31,7 @@ gem 'rails-html-sanitizer', '~> 1.0'
 # Amanda's additions
 gem 'unirest'
 gem 'pry'
+gem "font-awesome-rails"
 
 # Kevin's additions
 gem 'ruby-measurement'
