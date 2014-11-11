@@ -12,8 +12,8 @@ class Ingredient < ActiveRecord::Base
   }
 
   def to_ounces
-    if !has_nil_or_zero_measurement? && !has_nil_or_zero_quantity? && has_normal_measurement?
-      convert_to_long_form_normal_measurement
+    if !missing_measurement? && !missing_quantity? && normal_measurement?
+      convert_measurement_to_long_form
       parsed = Measurement.parse("#{self.quantity} #{self.measurement}")
       measurement_type = parsed.unit.to_s
       if is_weight?( measurement_type )
@@ -21,21 +21,19 @@ class Ingredient < ActiveRecord::Base
       elsif is_volume?( measurement_type )
         parsed.convert_to(:'fl oz')
       end
-    else
-      ''
     end
   end
 
-  def has_nil_or_zero_measurement?
+  def missing_measurement?
     measurement == nil || measurement == 0
   end
 
-  def has_nil_or_zero_quantity?
+  def missing_quantity?
     quantity == nil || quantity == 0
   end
 
-  def has_normal_measurement?
-    m = measurement.singularize.downcase
+  def normal_measurement?
+    m = measurement.singularize.downcase if !missing_measurement?
     @@normals.keys.include?(m) || @@normals.values.include?(m)
   end
 
@@ -49,7 +47,7 @@ class Ingredient < ActiveRecord::Base
     vol_types.include?(obj)
   end
 
-  def convert_to_long_form_normal_measurement
+  def convert_measurement_to_long_form
     m = self.measurement.singularize.downcase
     self.measurement= @@normals[self.measurement.singularize.downcase] if @@normals.keys.include?(m) 
   end
