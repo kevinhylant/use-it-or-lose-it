@@ -33,22 +33,22 @@ module Formattable
 			return ing_lists
 		end
 
-		def most_similar(array_list)
-			temp_array_1 = array_list[0]
-			temp_array_2 = array_list[1]
-			temp_comp = temp_array_1 + temp_array_2
+		def most_similar(array_of_ingredient_arrays)
+			similar_list_1 = array_of_ingredient_arrays[0]
+			similar_list_2 = array_of_ingredient_arrays[1]
+			combined_current_similar_list = similar_list_1 + similar_list_2
 
-			array_list[0..-2].each_with_index do |array1, index|
-				array_list[index+1..-1].each do |array2|
-					t = array1 + (array2 - array1)
-					if t.length < temp_comp.length
-						temp_array_1 = array1
-						temp_array_2 = array2
-						temp_comp = t
+			array_of_ingredient_arrays[0..-2].each_with_index do |compared_to, index|
+				array_of_ingredient_arrays[index+1..-1].each do |compared_with|
+					current_comparison = compared_to + (compared_with - compared_to)
+					if current_comparison.length < combined_current_similar_list.length
+						similar_list_1 = compared_to
+						similar_list_2 = compared_with
+						combined_current_similar_list = current_comparison
 					end
 				end
 			end
-			return [temp_array_1, temp_array_2, temp_comp]
+			return [similar_list_1, similar_list_2, combined_current_similar_list]
 		end
 
 		def most_similar_to(all_temps, array_list)
